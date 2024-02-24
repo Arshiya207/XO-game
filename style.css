@@ -1,0 +1,39 @@
+*,*::after,*:before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --border-cell-color:black;
+
+}
+.game-container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10rem;
+    
+}
+.cells-container{
+display: grid;
+grid-template-columns: repeat(3,1fr);
+grid-template-rows: repeat(3,1fr);
+width: 300px;
+height: 300px;
+border: 1px solid;
+margin-left: auto;
+
+}
+.cell{
+    border: 1px solid var(--border-cell-color);
+  
+}
+.game-input-container{
+    margin-left: auto;
+}
+.game-input-form{
+    display: flex;
+    flex-direction: column;
+}
