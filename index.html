@@ -1,48 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="arshiya">
-    <meta name="robots" content="index,follow">
-    <meta name="description" content="building xo game">
-    <meta name="keywords" content="XO, GAME,xo, game">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="arshiya" />
+    <meta name="robots" content="index,follow" />
+    <meta name="description" content="building xo game" />
+    <meta name="keywords" content="XO, GAME,xo, game" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
     <title>XO game</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="game-container">
-        <div class="cells-container">
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-        </div>
-        <div class="game-input-container">
-            <form action="#" method="post" class="game-input-form">
-                <label for="firstP">first person label</label>
-                <input type="text" name="firstPlayerName" id="firstP">
-                <label for="firstChar">first person character</label>
-                <input type="text" name="firstPlayerCharacter" id="firstChar">
-                <!--finish first person-->
-                <!--start second person-->
-                <label for="secondP">second person label</label>
-                <input type="text" name="secondPlayerName" id="secondP">
-                <label for="secondChar">second person character</label>
-                <input type="text" name="secondPlayerCharacter" id="secondChar">
+      <div class="cells-container">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <h2 class="sign">it's blank's turn</h2>
+      </div>
+      <div class="game-input-container">
+        <form action="#" method="post" class="game-input-form">
+          <!-- name -->
+          <div class="form-floating">
+            <input
+              type="text"
+              name="firstPlayerName"
+              id="firstP"
+              class="form-control"
+              placeholder="firstName"
+            />
+            <label for="firstP">first person name</label>
+          </div>
+          <!-- char -->
+          <div class="form-floating">
+            <select name="firstPersonChar" id="firstChar" class="form-control">
+              <option value="dragon" selected>dragon</option>
+              <option value="ninja">ninja</option>
+              <option value="knight">knight</option>
+            </select>
+            <label for="firstChar"> choose your character</label>
+          </div>
 
-            </form>
-
-        </div>
+          <!--finish first person-->
+          <!--start second person-->
+          <!-- name -->
+          <div class="form-floating">
+            <input
+              type="text"
+              name="secondPlayerName"
+              id="secondP"
+              class="form-control"
+              placeholder="firstName"
+            />
+            <label for="secondP">second person name</label>
+          </div>
+          <!-- char -->
+          <div class="form-floating">
+            <select
+              name="secondPersonChar"
+              id="secondChar"
+              class="form-control"
+            >
+              <option value="dragon">dragon</option>
+              <option value="ninja" selected>ninja</option>
+              <option value="knight">knight</option>
+            </select>
+            <label for="secondChar"> choose your character</label>
+          </div>
+          <button class="btn btn-primary" type="button">reset</button>
+        </form>
+      </div>
     </div>
 
-
-
-     <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

@@ -1,39 +1,129 @@
-*,*::after,*:before{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*,
+*::after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-:root{
-    --border-cell-color:black;
+:root {
+  --border-cell-color: black;
+}
+.game-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10rem;
+}
 
+.cells-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 300px;
+  height: 300px;
+  border: 1px solid;
+  margin-left: auto;
+  position: relative;
 }
-.game-container{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 10rem;
-    
-}
-.cells-container{
-display: grid;
-grid-template-columns: repeat(3,1fr);
-grid-template-rows: repeat(3,1fr);
-width: 300px;
-height: 300px;
-border: 1px solid;
-margin-left: auto;
+.sign {
+  position: absolute;
+  top: -2.5rem;
+  left: 0%;
 
+  width: 100%;
 }
-.cell{
-    border: 1px solid var(--border-cell-color);
-  
+.cell {
+  border: 1px solid var(--border-cell-color);
+  transition: 0.2s ease;
+  cursor: pointer;
 }
-.game-input-container{
-    margin-left: auto;
+.cell:hover {
+  background-color: #9bcf53;
 }
-.game-input-form{
-    display: flex;
-    flex-direction: column;
+.game-input-container {
+  margin-left: auto;
+}
+.game-input-form {
+  display: flex;
+  flex-direction: column;
+}
+.form-floating {
+  margin-bottom: 1rem;
+  min-width: 400px;
+}
+/*animations*/
+
+.dragon::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-image: url("animatedIcons/dragon.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  animation: puff-in-center 0.3s cubic-bezier(0.47, 0, 0.745, 0.715) both;
+}
+.ninja::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-image: url("animatedIcons/ninja.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  animation: puff-in-center 0.3s cubic-bezier(0.47, 0, 0.745, 0.715) both;
+}
+.knight::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-image: url("animatedIcons/knight.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  animation: puff-in-center 0.3s cubic-bezier(0.47, 0, 0.745, 0.715) both;
+}
+.girl::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-image: url("animatedIcons/virgo.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  animation: puff-in-center 0.3s cubic-bezier(0.47, 0, 0.745, 0.715) both;
+}
+.boy::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-image: url("animatedIcons/student.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  animation: puff-in-center 0.3s cubic-bezier(0.47, 0, 0.745, 0.715) both;
+}
+
+@keyframes puff-in-center {
+  0% {
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    -webkit-filter: blur(4px);
+    filter: blur(4px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+    opacity: 1;
+  }
 }
