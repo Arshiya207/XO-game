@@ -1,6 +1,6 @@
 "use strict";
 
-const cellsArr = document.querySelectorAll(".cell");
+const cellsArr = [...document.querySelectorAll(".cell")];
 let infoText = document.querySelector(".sign");
 let firstPersonName = document.querySelector("#firstP").value;
 let secondPersonName = document.querySelector("#secondP").value;
@@ -34,6 +34,8 @@ function startFunction(e) {
     firstPersonChar = document.querySelector("#firstChar").value;
     secondPersonChar = document.querySelector("#secondChar").value;
     numberOfClicksForStartBtn -= 1;
+    beginTheGame();
+    alert("game has been started. enjoy your game");
   } else {
     return;
   }
@@ -42,10 +44,14 @@ function startFunction(e) {
 function resetFunction(e) {
   isGameStart = false;
   numberOfClicksForStartBtn = 1;
+  turn = 1;
+  infoText.innerHTML = "it's someone's turn";
   cellsArr.forEach((cell) => {
     cell.classList.remove(firstPersonChar);
     cell.classList.remove(secondPersonChar);
   });
+
+  alert("board is now clear. click on start");
 }
 
 //* end functions
@@ -57,7 +63,10 @@ resetBtn.addEventListener("click", resetFunction);
 //! end code for reset btn
 
 //! start code for each cell
-cellsArr.forEach((cell) => {
-  cell.addEventListener("click", cellFunction, { once: true });
-});
+function beginTheGame() {
+  cellsArr.forEach((cell) => {
+    cell.addEventListener("click", cellFunction, { once: true });
+  });
+}
+
 //! end code for each cell
