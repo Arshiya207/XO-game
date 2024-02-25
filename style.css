@@ -26,8 +26,6 @@
   border: 1px solid;
   margin-left: auto;
 }
-.sign {
-}
 .cell {
   border: 1px solid var(--border-cell-color);
   transition: 0.2s ease;

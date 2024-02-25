@@ -33,6 +33,12 @@ function cellFunction(e) {
       isGameStart = false;
       infoText.innerHTML = firstPersonName + " won the game";
       return;
+    }else{
+      if(eveluateDraw()){
+        isGameStart=false;
+        infoText.innerHTML="game is draw"
+        return
+      }
     }
     turn = 2;
   } else if (turn === 2) {
@@ -43,6 +49,12 @@ function cellFunction(e) {
       isGameStart = false;
       infoText.innerHTML = secondPersonName + " won the game";
       return;
+    }else{
+      if(eveluateDraw()){
+        isGameStart=false;
+        infoText.innerHTML="game is draw"
+        return
+      }
     }
     turn = 1;
   }
@@ -111,6 +123,14 @@ function evaluateFunction(turn) {
 
     return finalResult;
   }
+}
+//-----
+function eveluateDraw(){
+ return cellsArr.every(cell=>{
+      return(cell.classList.contains(firstPersonChar)|| cell.classList.contains(secondPersonChar))
+
+  })
+
 }
 //* end functions
 //! start btn code
