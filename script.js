@@ -6,8 +6,16 @@ let firstPersonName = document.querySelector("#firstP").value;
 let secondPersonName = document.querySelector("#secondP").value;
 let firstPersonChar = document.querySelector("#firstChar").value;
 let secondPersonChar = document.querySelector("#secondChar").value;
+let customAlert = document.querySelector(".custom-alert");
 const startBtn = document.querySelector(".start-btn");
 const resetBtn = document.querySelector(".reset-btn");
+const alertBackColorForRemove = "alert-red";
+const alertBackColorForStart = "alert-green";
+let darkModeToggleBtn = document.querySelector(".darkMode-container");
+let darkModeImg = document.querySelector(".darkMode-container>img");
+const darkBgSpread = document.querySelector(".darkBgSpread");
+const htm = document.querySelector("html");
+let isDark = false;
 let turn = 1;
 let numberOfClicksForStartBtn = 1;
 let isGameStart = false;
@@ -22,6 +30,49 @@ const winArray = [
   [2, 4, 6],
 ];
 //* functions
+//---- switchDarkMode
+function switchDarkMode() {
+  isDark = isDark ? false : true;
+  if (isDark) {
+    darkModeImg.classList.remove("custom-show");
+    darkModeImg.classList.add("custom-fade");
+    darkModeImg.addEventListener("animationend", (event) => {
+      darkModeImg.src = "animatedIcons/night.png";
+      darkModeImg.classList.remove("custom-fade");
+      darkModeImg.classList.remove("sun");
+      darkModeImg.classList.add("moon");
+      darkBgSpread.classList.remove("sun");
+      darkBgSpread.classList.add("moon");
+      htm.dataset.bsTheme = "dark";
+      darkModeImg.classList.add("custom-show");
+    });
+  } else {
+    darkModeImg.classList.remove("custom-show");
+    darkModeImg.classList.add("custom-fade");
+    darkModeImg.addEventListener("animationend", (event) => {
+      darkModeImg.src = "animatedIcons/sun.png";
+      darkModeImg.classList.remove("custom-fade");
+      darkModeImg.classList.remove("moon");
+      darkModeImg.classList.add("sun");
+      darkBgSpread.classList.remove("moon");
+      htm.dataset.bsTheme = "light";
+      darkBgSpread.classList.add("sun");
+      darkModeImg.classList.add("custom-show");
+    });
+  }
+}
+//----removeAndAddAlert
+function removeAndAddAlert(message, backColor, orderToRemove) {
+  customAlert.innerHTML = message;
+  customAlert.classList.remove(orderToRemove);
+  customAlert.classList.add(backColor);
+  customAlert.classList.remove("slide-out-top");
+  customAlert.classList.add("slide-in-top");
+  setTimeout(() => {
+    customAlert.classList.remove("slide-in-top");
+    customAlert.classList.add("slide-out-top");
+  }, 3000);
+}
 //* cell function
 function cellFunction(e) {
   if (!isGameStart) return;
@@ -29,15 +80,14 @@ function cellFunction(e) {
     this.classList.add(firstPersonChar);
     infoText.innerHTML = "it's " + secondPersonName + "'s turn";
     if (evaluateFunction(turn)) {
-      alert("firstPerson won");
       isGameStart = false;
       infoText.innerHTML = firstPersonName + " won the game";
       return;
-    }else{
-      if(eveluateDraw()){
-        isGameStart=false;
-        infoText.innerHTML="game is draw"
-        return
+    } else {
+      if (eveluateDraw()) {
+        isGameStart = false;
+        infoText.innerHTML = "game is draw";
+        return;
       }
     }
     turn = 2;
@@ -45,21 +95,20 @@ function cellFunction(e) {
     this.classList.add(secondPersonChar);
     infoText.innerHTML = "it's " + firstPersonName + "'s turn";
     if (evaluateFunction(turn)) {
-      alert("secondPerson won");
       isGameStart = false;
       infoText.innerHTML = secondPersonName + " won the game";
       return;
-    }else{
-      if(eveluateDraw()){
-        isGameStart=false;
-        infoText.innerHTML="game is draw"
-        return
+    } else {
+      if (eveluateDraw()) {
+        isGameStart = false;
+        infoText.innerHTML = "game is draw";
+        return;
       }
     }
     turn = 1;
   }
 }
-//----
+//----startFunction
 function startFunction(e) {
   if (numberOfClicksForStartBtn) {
     isGameStart = true;
@@ -69,12 +118,16 @@ function startFunction(e) {
     secondPersonChar = document.querySelector("#secondChar").value;
     numberOfClicksForStartBtn -= 1;
     beginTheGame();
-    alert("game has been started. enjoy your game");
+    removeAndAddAlert(
+      "the game has begun enjoy the game",
+      alertBackColorForStart,
+      alertBackColorForRemove
+    );
   } else {
     return;
   }
 }
-//-----
+//-----resetFunction
 function resetFunction(e) {
   isGameStart = false;
   numberOfClicksForStartBtn = 1;
@@ -86,9 +139,13 @@ function resetFunction(e) {
     cell.querySelector(".overlay").classList.remove("green");
   });
 
-  alert("board is now clear. click on start");
+  removeAndAddAlert(
+    "the game has been reseted. <span class='text-warning fw-bold'>click on start</span> to start the new game",
+    alertBackColorForRemove,
+    alertBackColorForStart
+  );
 }
-//-----
+//-----evaluateFunction
 function evaluateFunction(turn) {
   if (turn === 1) {
     const finalResult = winArray.some((winArr) => {
@@ -124,15 +181,17 @@ function evaluateFunction(turn) {
     return finalResult;
   }
 }
-//-----
-function eveluateDraw(){
- return cellsArr.every(cell=>{
-      return(cell.classList.contains(firstPersonChar)|| cell.classList.contains(secondPersonChar))
-
-  })
-
+//-----eveluateDraw
+function eveluateDraw() {
+  return cellsArr.every((cell) => {
+    return (
+      cell.classList.contains(firstPersonChar) ||
+      cell.classList.contains(secondPersonChar)
+    );
+  });
 }
 //* end functions
+darkModeToggleBtn.addEventListener("click", switchDarkMode);
 //! start btn code
 startBtn.addEventListener("click", startFunction);
 //! end start btn code

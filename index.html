@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +8,7 @@
     <meta name="description" content="building xo game" />
     <meta name="keywords" content="XO, GAME,xo, game" />
     <link rel="stylesheet" href="style.css" />
+
     <link
       rel="stylesheet"
       href="node_modules/bootstrap/dist/css/bootstrap.min.css"
@@ -15,6 +16,11 @@
     <title>XO game</title>
   </head>
   <body>
+    <div class="darkMode-container">
+      <img src="animatedIcons/sun.png" alt="sun" class="darkMode-img" />
+      <div class="toggle"></div>
+    </div>
+    <div class="darkBgSpread"></div>
     <div class="game-container">
       <div class="cells-container">
         <div class="cell">
@@ -106,6 +112,8 @@
       </div>
     </div>
 
+    <!--my alert-->
+    <div class="custom-alert"></div>
     <script src="script.js"></script>
   </body>
 </html>
