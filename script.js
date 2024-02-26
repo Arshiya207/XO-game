@@ -15,7 +15,9 @@ let darkModeToggleBtn = document.querySelector(".darkMode-container");
 let darkModeImg = document.querySelector(".darkMode-container>img");
 const darkBgSpread = document.querySelector(".darkBgSpread");
 const htm = document.querySelector("html");
-let isDark = false;
+let isDark =
+  localStorage.getItem("darkMode") ?? localStorage.setItem("darkMode", "false");
+isDark = JSON.parse(localStorage.getItem("darkMode"));
 let turn = 1;
 let numberOfClicksForStartBtn = 1;
 let isGameStart = false;
@@ -30,9 +32,22 @@ const winArray = [
   [2, 4, 6],
 ];
 //* functions
+//--- apply dark
+function applyDarkMode() {
+  if (isDark) {
+    darkModeImg.src = "animatedIcons/night.png";
+    htm.dataset.bsTheme = "dark";
+  } else {
+    darkModeImg.src = "animatedIcons/sun.png";
+    htm.dataset.bsTheme = "light";
+  }
+}
 //---- switchDarkMode
 function switchDarkMode() {
-  isDark = isDark ? false : true;
+  isDark = !isDark;
+  let isDarkString = JSON.stringify(isDark);
+  localStorage.setItem("darkMode", isDarkString);
+
   if (isDark) {
     darkModeImg.classList.remove("custom-show");
     darkModeImg.classList.add("custom-fade");
@@ -207,3 +222,4 @@ function beginTheGame() {
 }
 
 //! end code for each cell
+window.addEventListener("load", applyDarkMode);
